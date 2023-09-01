@@ -11,7 +11,6 @@ class Solution {
             myString = "";
             myString = String.valueOf(arr);
         }
-            System.out.println(myString);
         if(myString.contains(pat)) {
             answer = 1;
         }
