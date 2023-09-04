@@ -1,15 +1,15 @@
+import java.util.*;
+
 class Solution {
     public long solution(String numbers) {
-        numbers = numbers.replaceAll("one", "1");
-        numbers = numbers.replaceAll("two", "2");
-        numbers = numbers.replaceAll("three", "3");
-        numbers = numbers.replaceAll("four", "4");
-        numbers = numbers.replaceAll("five", "5");
-        numbers = numbers.replaceAll("six", "6");
-        numbers = numbers.replaceAll("seven", "7");
-        numbers = numbers.replaceAll("eight", "8");
-        numbers = numbers.replaceAll("nine", "9");
-        numbers = numbers.replaceAll("zero", "0");
+        Map<String, String> map = new HashMap<>();
+        map.put("zero" , "0"); map.put("one"  , "1"); map.put("two"  , "2"); map.put("three", "3"); 
+        map.put("four" , "4"); map.put("five" , "5"); map.put("six"  , "6"); map.put("seven", "7"); 
+        map.put("eight", "8"); map.put("nine" , "9");
+
+        for(String x : map.keySet()) 
+            numbers = numbers.replace(x, map.get(x));
+
         long answer = Long.parseLong(numbers);
         return answer;
     }
