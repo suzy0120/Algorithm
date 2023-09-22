@@ -1,19 +1,19 @@
 class Solution {
     public int solution(int[] num_list) {
         int answer = 0;
-        int count = 0;
+        int n = 0;
         for(int i = 0; i < num_list.length; i++) {
-            while(num_list[i] > 1) {
-                if(num_list[i] % 2 == 0) {
-                    count++;
-                    num_list[i] /= 2;
+            n = num_list[i];
+            while(n > 1) {
+                if(n % 2 == 0) {
+                    answer++;
+                    n /= 2;
                 } else {
-                    count++;
-                    num_list[i] = (num_list[i]-1) / 2;
+                    answer++;
+                    n = (n-1) / 2;
                 }
             }
         }
-        answer = count;
         return answer;
     }
 }
