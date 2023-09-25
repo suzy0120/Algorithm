@@ -9,9 +9,9 @@ class Solution {
             }
         }
         String[] answer = new String[list.size()];
-        for(int i = 0; i < answer.length; i++) {
-            answer[i] = list.get(i);
-        }
+        int idx = 0;
+        for (String str : list)
+            answer[idx++] = str;
         return answer;
     }
 }
