@@ -10,7 +10,6 @@ class Solution {
             }
             if(!check) list.add(arr[i]);
             if(list.size() == k) break;
-            
         }
         if(list.size() < k) {
             int size = list.size();
