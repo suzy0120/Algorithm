@@ -13,7 +13,7 @@ class Solution {
             }
         }
         int[] answer = new int[list.size()];
-        if(list.size() == 0) {
+        if(list.isEmpty()) {
             answer = new int[1];
             answer[0] = -1;
         }
