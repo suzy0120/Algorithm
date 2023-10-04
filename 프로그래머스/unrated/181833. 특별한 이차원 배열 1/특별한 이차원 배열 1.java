@@ -6,9 +6,8 @@ class Solution {
             for(int c = 0; c < n; c++) {
                 if(c == idx) {
                     answer[r][c] = 1;
-                    continue;
+                    break;
                 }
-                answer[r][c] = 0;
             }
             idx++;
         }
