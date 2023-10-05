@@ -2,12 +2,10 @@ import java.util.*;
 
 class Solution {
     public String solution(String my_string) {
-        String answer = my_string.toLowerCase();
-        String[] arr = new String[my_string.length()];
-        arr = answer.split("");
+        String answer = "";
+        char[] arr = my_string.toLowerCase().toCharArray();
         Arrays.sort(arr);
-        answer = "";
-        for(String n : arr) {
+        for(char n : arr) {
             answer += n;
         }
         return answer;
