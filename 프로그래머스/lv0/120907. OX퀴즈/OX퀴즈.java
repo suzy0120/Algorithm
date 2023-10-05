@@ -6,18 +6,18 @@ class Solution {
             arr[i] = quiz[i].split(" ");
         }
         
-        for(int r = 0; r < quiz.length; r++) {
-            if(arr[r][1].equals("+")) {
-                if(Integer.parseInt(arr[r][4]) == (Integer.parseInt(arr[r][0]) + Integer.parseInt(arr[r][2]))) {
-                    answer[r] = "O";
+        for(int i = 0; i < quiz.length; i++) {
+            if(arr[i][1].equals("+")) {
+                if(Integer.parseInt(arr[i][4]) == (Integer.parseInt(arr[i][0])+Integer.parseInt(arr[i][2]))) {
+                    answer[i] = "O";
                 } else {
-                    answer[r] = "X";
+                    answer[i] = "X";
                 }
             } else {
-                if(Integer.parseInt(arr[r][4]) == (Integer.parseInt(arr[r][0]) - Integer.parseInt(arr[r][2]))) {
-                    answer[r] = "O";
+                if(Integer.parseInt(arr[i][4]) == (Integer.parseInt(arr[i][0])-Integer.parseInt(arr[i][2]))) {
+                    answer[i] = "O";
                 } else {
-                    answer[r] = "X";
+                    answer[i] = "X";
                 }
             }
         }
