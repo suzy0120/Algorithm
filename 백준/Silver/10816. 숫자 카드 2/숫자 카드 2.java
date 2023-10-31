@@ -1,19 +1,27 @@
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 public class Main {
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st;
 		StringBuilder sb = new StringBuilder();
-		int N = sc.nextInt();
+		int N = Integer.parseInt(br.readLine());
 		int[] arr1 = new int[N];
+		
+		st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < N; i++) {
-			arr1[i] = sc.nextInt();
+			arr1[i] = Integer.parseInt(st.nextToken());
 		}
-		int M = sc.nextInt();
+		
+		int M = Integer.parseInt(br.readLine());
 		int[] arr2 = new int[M];
+		
+		st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < M; i++) {
-			arr2[i] = sc.nextInt();
+			arr2[i] = Integer.parseInt(st.nextToken());
 		}
 		
 		// 카운팅 정렬
@@ -25,6 +33,8 @@ public class Main {
 		for(int i = 0; i < arr2.length; i++) {
 			sb.append(count[arr2[i]+10000000]).append(" ");
 		}
-		System.out.print(sb);
+		
+		bw.write(sb + "");
+		bw.close();
 	}
 }
