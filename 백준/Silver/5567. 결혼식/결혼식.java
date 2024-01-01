@@ -1,44 +1,41 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt(); // 동기의 수
-        int m = sc.nextInt(); // 친구 관계의 수
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        boolean[] visit = new boolean[n + 1];
 
-        List<List<Integer>> graph = new ArrayList<>();
-        for (int i = 0; i <= n; i++) {
-            graph.add(new ArrayList<>());
+        List<List<Integer>> list = new ArrayList<>();
+        for(int i = 0; i <= n; i++) {
+        	list.add(new ArrayList<Integer>());
         }
 
-        for (int i = 0; i < m; i++) {
-            int a = sc.nextInt();
+        for(int i = 0; i < m; i++) {
+        	int a = sc.nextInt();
             int b = sc.nextInt();
-            graph.get(a).add(b);
-            graph.get(b).add(a);
-        }
 
-        boolean[] visited = new boolean[n + 1];
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(1); // 주인공(1번)부터 시작
-        visited[1] = true;
+            list.get(a).add(b);
+            list.get(b).add(a);
+        }
 
         int count = 0;
-        int level = 0;
-
-        while (!queue.isEmpty() && level < 2) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                int current = queue.poll();
-                for (int friend : graph.get(current)) {
-                    if (!visited[friend]) {
-                        visited[friend] = true;
-                        queue.offer(friend);
-                        count++;
-                    }
-                }
+        visit[1] = true;
+        
+        List<Integer> sangGeun = list.get(1);
+        for(int a : sangGeun) {
+            if(!visit[a]) count++;
+            visit[a] = true;
+            
+            List<Integer> friend = list.get(a);
+            for(int b : friend) {
+                if(!visit[b]) count++;
+                	visit[b] = true;
             }
-            level++;
         }
 
         System.out.println(count);
