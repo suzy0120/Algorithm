@@ -33,8 +33,8 @@ public class Main {
 
         BFS(X);
 
-        for(int i=0; i<=N; i++) {
-            if(visited[i]==K) {
+        for(int i=1; i<=N; i++) {
+            if(visited[i] == K) {
                 answer.add(i);
             }
         }
@@ -54,8 +54,8 @@ public class Main {
         while(!queue.isEmpty()) {
             int now_node = queue.poll();
 
-            for (int destination : graph[now_node]){
-                if (visited[destination]==-1){
+            for(int destination : graph[now_node]) {
+                if(visited[destination] == -1) {
                     visited[destination] = visited[now_node] + 1;
                     queue.add(destination);
                 }
