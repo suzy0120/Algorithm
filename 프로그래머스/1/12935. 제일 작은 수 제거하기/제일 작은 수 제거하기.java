@@ -4,23 +4,14 @@ class Solution {
     public int[] solution(int[] arr) {
         ArrayList<Integer> list = new ArrayList<>();
         
-        int min = Integer.MAX_VALUE;
-        for(int num : arr) {
-            if(num < min) {
-                min = num;
-            }
+        if(arr.length == 1) return new int[]{-1};
+        else {
+            for(int num : arr) list.add(num);
         }
         
-        for(int num : arr) {
-            if(min != num) {
-                list.add(num);
-            }
-        }
+        list.remove(Collections.min(list));
         
-        
-        if(list.isEmpty()) return new int[]{-1};
-        
-        int[] answer = new int[list.size()];
+        int[] answer = new int[arr.length-1];
         for(int i=0; i<answer.length; i++) answer[i]=list.get(i);
         
         return answer;
