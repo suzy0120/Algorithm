@@ -2,9 +2,8 @@ class Solution {
     public String solution(int n) {
         String answer = "";
         
-        for(int i=1; i<=n; i++) {
-            char c = i%2==1 ? '수' : '박';
-            answer +=c;
+        for(int i=0; i<n; i++) {
+            answer += (i%2==0) ? "수" : "박";
         }
         
         return answer;
