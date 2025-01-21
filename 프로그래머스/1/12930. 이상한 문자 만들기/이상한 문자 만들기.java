@@ -1,12 +1,14 @@
 class Solution {
     public String solution(String s) {
-        String answer = "";
-        int cnt = 0;
-        String[] array = s.split("");
-
-        for(String str : array) {
-            cnt = str.contains(" ") ? 0 : cnt+1;
-            answer += cnt%2==0 ? str.toLowerCase() : str.toUpperCase(); 
+        StringBuilder answer = new StringBuilder();
+        String[] sArr = s.split(" ", -1); // 공백 유지하며 split
+        
+        for(int i=0; i<sArr.length; i++) {
+            for(int j=0; j<sArr[i].length(); j++) {
+                if(j%2==0) answer.append(Character.toUpperCase(sArr[i].charAt(j)));
+                else answer.append(Character.toLowerCase(sArr[i].charAt(j)));
+            }
+            if(i < sArr.length-1) answer.append(" ");
         }
         
         return answer.toString();
