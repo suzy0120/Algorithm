@@ -1,21 +1,19 @@
 class Solution {
     public int solution(int number, int limit, int power) {
         int answer = 0;
-        int[] nArr = new int[number];
+        int[] count = new int[number+1];
         
-        for(int i=0; i<number; i++) {
-            int count = 0;
-            for (int j = 1; j * j <= i + 1; j++) {
-                if ((i + 1) % j == 0) {
-                    count++; // 작은 약수
-                    if (j != (i + 1) / j) count++; // 대칭 약수
-                }
+        for(int i=1; i<=number; i++) {
+            for(int j=1; j<=number/i; j++) {
+                count[i*j]++;
             }
-            if(count <= limit) nArr[i] = count;
-            else nArr[i] = power;
         }
         
-        for(int n : nArr) answer += n;
+        for(int i=1; i<=number; i++) {
+            if(count[i] > limit) count[i] = power;
+        }
+        
+        for(int n : count) answer += n;
         
         return answer;
     }
