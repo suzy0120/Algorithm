@@ -1,11 +1,9 @@
 class Solution {
     public long solution(long n) {
         long answer = -1;
-        double num = Math.sqrt(n);
         
-        if(num == Math.floor(num)) {
-            long next = (long) num + 1;
-            answer = next * next;
+        if(Math.pow((int) Math.sqrt(n), 2) == n) {
+            answer = (long) Math.pow(Math.sqrt(n)+1, 2);
         }
         
         return answer;
