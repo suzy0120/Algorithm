@@ -14,7 +14,9 @@ class Solution {
         }
         
         for(int i=0; i<survey.length; i++) {
-            if(choices[i] <= 4) {
+            if(choices[i] == 4) continue;
+            
+            if(choices[i] < 4) {
                 hm.put(survey[i].charAt(0), hm.get(survey[i].charAt(0))+score[choices[i]]);
             } else {
                 hm.put(survey[i].charAt(1), hm.get(survey[i].charAt(1))+score[choices[i]]);
