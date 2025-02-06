@@ -3,16 +3,16 @@ class Solution {
         int answer = 0;
         String[] words = {"aya", "ye", "woo", "ma"};
         
-        for(String b : babbling) {
-            if(b.contains("ayaaya") || b.contains("yeye") ||
-               b.contains("woowoo") || b.contains("mama")) continue;
+        for(String s : babbling) {
+            if(s.contains("ayaaya") || s.contains("yeye") ||
+               s.contains("woowoo") || s.contains("mama")) continue;
             
-            String temp = b;
-            for(String word : words)
-                temp = temp.replace(word, " ");
+            for(String word : words) {
+                s=s.replace(word, " ");
+            }
             
-            temp = temp.replace(" ", "");
-            if(temp.equals("")) answer++;
+            s=s.replace(" ", "");
+            if(s.equals("")) answer++;
         }
         
         return answer;
