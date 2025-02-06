@@ -7,16 +7,8 @@ class Solution {
         for(char c : s.toCharArray()) {
             int count = 0;
             while(count < index) {
-                c++;
-                if(c > 'z') c = 'a';
-                boolean isSkip = false;
-                for(char cArr : skip.toCharArray()) {
-                    if(c==cArr) {
-                        isSkip = true;
-                        break;
-                    }
-                }
-                if(!isSkip) count++;
+                c = (c == 'z') ? 'a' : (char) (c+1);
+                if(!skip.contains(String.valueOf(c))) count++;
             }
             answer += c;
         }
