@@ -5,10 +5,10 @@ class Solution {
         int sum = 0;
         
         for(char c : array) {
-            sum+=c-'0';
+            sum += c-'0';
         }
         
-        if(x%sum!=0) answer = false;
+        if(x%sum != 0) answer = false;
         return answer;
     }
 }
