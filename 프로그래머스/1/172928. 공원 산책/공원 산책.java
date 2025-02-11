@@ -1,39 +1,47 @@
 class Solution {
     public int[] solution(String[] park, String[] routes) {
-        int nr = 0;
-        int nc = 0;
-        for(int r=0; r<park.length; r++) {
-            for(int c=0; c<park[0].length(); c++) {
-                if(park[r].charAt(c)=='S') {
-                    nr=r;
-                    nc=c;
-                }
+        int R = park.length;
+        int C = park[0].length();
+        int row = 0, col = 0;
+        for(int i=0; i<R; i++) {
+            int idx = park[i].indexOf('S');
+            if(idx != -1) {
+                row = i;
+                col = idx;
+                break;
             }
         }
         
-        int dr = nr;
-        int dc = nc;
-        int N = park.length;
-        int M = park[0].length();
+        int[] dr = {-1, 1, 0, 0};
+        int[] dc = {0, 0, -1, 1};
+        char[] dirs = {'N', 'S', 'W', 'E'};
         for(String s : routes) {
-            int r = dr;
-            int c = dc;
-            int count = s.charAt(2)-'0';
-            for(int d=1; d<=count; d++) {
-                if(s.charAt(0)=='N') dr--;
-                else if(s.charAt(0)=='S') dr++;
-                else if(s.charAt(0)=='W') dc--;
-                else if(s.charAt(0)=='E') dc++;
+            char c = s.charAt(0);
+            int step = s.charAt(2)-'0';
+            int nr = row, nc = col;
+            boolean canMove = true;
+            for(int i=0; i<step; i++) {
+                for(int j=0; j<4; j++) {
+                    if(c==dirs[j]) {
+                        nr+=dr[j];
+                        nc+=dc[j];
+                        break;
+                    }
+                }
                 
-                if(0>dr || dr>=N || 0>dc || dc>=M || park[dr].charAt(dc)=='X') {
-                    dr = r;
-                    dc = c;
+                if(nr<0 || R<=nr || nc<0 || C<=nc || park[nr].charAt(nc)=='X') {
+                    canMove = false;
                     break;
                 }
             }
+            
+            if(canMove) {
+                row = nr;
+                col = nc;
+            }
         }
         
-        int[] answer = {dr, dc};
+        int[] answer = {row, col};
         return answer;
     }
 }
