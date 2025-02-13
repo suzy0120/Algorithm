@@ -41,8 +41,17 @@ class Solution {
                 break;
         }
         
-        int[][] answer = list.toArray(new int[list.size()][]);
-        Arrays.sort(answer, (row1, row2) -> Integer.compare(row1[sortColumn], row2[sortColumn]));
+        Collections.sort(list, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] row1, int[] row2) {
+                return Integer.compare(row1[sortColumn], row2[sortColumn]);
+            }
+        });
+        
+        int[][] answer = new int[list.size()][];
+        for(int i=0; i<list.size(); i++) {
+            answer[i] = list.get(i);
+        }
         return answer;
     }
 }
