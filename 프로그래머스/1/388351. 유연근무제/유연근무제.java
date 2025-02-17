@@ -3,34 +3,42 @@ class Solution {
         int n = schedules.length;
         int answer = 0;
         
+        int[] validDays = getValidDays(startday);
+        
         for(int i=0; i<n; i++) {
-            int succession = 0;
-            int hour = schedules[i]+10;
-            if(hour%100 > 59) hour = ((hour/100+1)*100) + ((hour%100)-60);
+            int time = schedules[i];
+            int hour = time/100;
+            int minute = time%100 + 10;
+            if(minute > 59) {
+                hour += 1;
+                minute -= 60;
+            }
+            time = hour*100 + minute;
             
-            for(int j=0; j<7; j++) {
-                if(startday == 1) {
-                    if(j==5) break;
-                } else if(startday == 2) {
-                    if(j==4 || j==5) continue; 
-                } else if(startday == 3) {
-                    if(j==3 || j==4) continue; 
-                } else if(startday == 4) {
-                    if(j==2 || j==3) continue; 
-                } else if(startday == 5) {
-                    if(j==1 || j==2) continue; 
-                } else if(startday == 6) {
-                    if(j==0 || j==1) continue; 
-                } else {
-                    if(j==6 || j==0) continue; 
+            boolean qualifies = true;
+            for(int day : validDays) {
+                if(time < timelogs[i][day]) {
+                    qualifies = false;
+                    break;
                 }
-                
-                if((hour) >= timelogs[i][j]) succession++;
             }
             
-            if(succession == 5) answer++;
+            if(qualifies) answer++;
         }
         
         return answer;
+    }
+    
+    private int[] getValidDays(int startday) {
+        switch(startday) {
+            case 1: return new int[]{0, 1, 2, 3, 4};
+            case 2: return new int[]{0, 1, 2, 3, 6};
+            case 3: return new int[]{0, 1, 2, 5, 6};
+            case 4: return new int[]{0, 1, 4, 5, 6};
+            case 5: return new int[]{0, 3, 4, 5, 6};
+            case 6: return new int[]{2, 3, 4, 5, 6};
+            case 7: return new int[]{1, 2, 3, 4, 5};
+            default: return new int[]{};
+        }
     }
 }
