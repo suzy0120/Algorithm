@@ -4,8 +4,8 @@ class Solution {
         
         int idx = 0;
         for(long i=left; i<=right; i++) {
-            int r = (int)(i/n) + 1;
-            int c = (int)(i%n) + 1;
+            int r = (int)(i/n+1);
+            int c = (int)(i%n+1);
             answer[idx++] = Math.max(r, c);
         }
         
