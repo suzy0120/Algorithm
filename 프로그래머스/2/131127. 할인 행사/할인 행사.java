@@ -3,23 +3,22 @@ import java.util.*;
 class Solution {
     public int solution(String[] want, int[] number, String[] discount) {
         int answer = 0;
+        Map<String, Integer> map = new HashMap<>();
         
-        for (int start = 0; start <= discount.length - 10; start++) {
-            int[] tempNumber = Arrays.copyOf(number, number.length);
-            int count = 0;
-
-            for (int i = start; i < start + 10; i++) {
-                for(int j = 0; j < want.length; j++) {
-                    if(discount[i].equals(want[j]) && tempNumber[j] > 0) {
-                        tempNumber[j]--;
-                        
-                        if(tempNumber[j] == 0) count++;
-                        break;
-                    }
-                }
+        for(int i=0; i<=discount.length-10; i++) {
+            for(int j=0; j<want.length; j++) {
+                map.put(want[j], number[j]);
             }
             
-            if(count == want.length) answer++;
+            int count = 0;
+            for(int j=i; j<i+10; j++) {
+                if(map.containsKey(discount[j]) && map.get(discount[j])>0) {
+                    map.replace(discount[j], map.get(discount[j])-1);
+                    count++;
+                } else break;
+                
+                if(count == 10) answer++;
+            }
         }
         
         return answer;
