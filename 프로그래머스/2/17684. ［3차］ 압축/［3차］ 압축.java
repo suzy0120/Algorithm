@@ -3,7 +3,7 @@ import java.util.*;
 class Solution {
     public int[] solution(String msg) {
         Map<String, Integer> dictionary = new HashMap<>();
-        List<Integer> output = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         
         for(int i=0; i<26; i++) {
             dictionary.put(String.valueOf((char) ('A'+i)), i+1);
@@ -12,26 +12,34 @@ class Solution {
         int num = 27;
         StringBuilder sb = new StringBuilder();
         
-        for(int i=0; i<msg.length();) {
-            sb.setLength(0); // StringBuilder 초기화
+        loop : for(int i=0; i<msg.length();) {
+            sb.setLength(0);
             sb.append(msg.charAt(i));
-            int j=i+1;
+            boolean visited = false;
+            int len = 0;
             
-            while(j < msg.length() && dictionary.containsKey(sb.toString()+msg.charAt(j))) {
-                sb.append(msg.charAt(j));
-                j++;
+            for(int j=i+1; j<=msg.length(); j++) {
+                if(dictionary.containsKey(sb.toString())) {
+                    if(visited) list.remove(list.size()-1);
+                    list.add(dictionary.get(sb.toString()));
+                    
+                    if(i+sb.length() >= msg.length()) break loop;
+                    
+                    visited = true;
+                    len = sb.length();
+                } else {
+                    dictionary.put(sb.toString(), num++);
+                    i+=len;
+                    break;
+                }
+                
+                if(j < msg.length()) sb.append(msg.charAt(j));
             }
-            
-            output.add(dictionary.get(sb.toString()));
-            
-            if(j < msg.length()) dictionary.put(sb.toString()+msg.charAt(j), num++);
-            
-            i += sb.length();
         }
         
-        int[] answer = new int[output.size()];
+        int[] answer = new int[list.size()];
         for(int i=0; i<answer.length; i++) {
-            answer[i] = output.get(i);
+            answer[i] = list.get(i);
         }
         
         return answer;
