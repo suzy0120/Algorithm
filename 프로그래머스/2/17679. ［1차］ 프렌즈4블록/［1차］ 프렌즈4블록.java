@@ -16,10 +16,9 @@ class Solution {
             for(int r=0; r<m-1; r++) {
                 for(int c=0; c<n-1; c++) {
                     char base = cBoard[r][c];
-                    if(base != 'x' &&
-                       base == cBoard[r+1][c] &&
-                       base == cBoard[r][c+1] &&
-                       base == cBoard[r+1][c+1]) {
+                    
+                    if(base != 'x' && base == cBoard[r+1][c] &&
+                       base == cBoard[r][c+1] && base == cBoard[r+1][c+1]) {
                         visited[r][c] = visited[r+1][c] = visited[r][c+1] = visited[r+1][c+1] = true;
                         found = true;
                     }
@@ -38,16 +37,17 @@ class Solution {
             }
             
             for(int c=0; c<n; c++) {
-                int idx = m-1;
+                List<Character> list = new ArrayList<>();
                 
                 for(int r=m-1; r>=0; r--) {
-                    if(cBoard[r][c] != 'x') {
-                        cBoard[idx--][c] = cBoard[r][c];
-                    }
+                    if(cBoard[r][c] != 'x') list.add(cBoard[r][c]);
                 }
                 
-                while(idx >= 0) {
-                    cBoard[idx--][c] = 'x';
+                int row = m-1;
+                for(char ch : list) cBoard[row--][c] = ch;
+                
+                while(row >= 0) {
+                    cBoard[row--][c] = 'x';
                 }
             }
         }
