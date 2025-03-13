@@ -6,16 +6,13 @@ class Solution {
         for(int i=0; i<players.length; i++) {
             int server = players[i]/m;
             
-            if(server > 0) {
-                int len = i+k-1 < players.length ? i+k : players.length;
+            if(server > count[i]) {
+                int diff = server - count[i];
+                answer += diff;
                 
-                if(server > count[i]) {
-                    int increase = count[i];
-                    answer += (server-increase);
-                    
-                    for(int j=i; j<len; j++) {
-                        count[j] += (server-increase);
-                    }
+                int end = Math.min(i+k, players.length);
+                for(int j=i; j<end; j++) {
+                    count[j] += diff;
                 }
             }
         }
