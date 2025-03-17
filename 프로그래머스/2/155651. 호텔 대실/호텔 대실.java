@@ -15,7 +15,7 @@ class Solution {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         
         for(int[] t : time) {
-            if(!pq.isEmpty() && pq.peek() <= t[0]) pq.poll();
+            if(!pq.isEmpty() && pq.peek()<=t[0]) pq.poll();
             
             pq.offer(t[1]);
         }
