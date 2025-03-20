@@ -1,53 +1,40 @@
-import java.util.*;
-
 class Solution {
     public int solution(int[] arrayA, int[] arrayB) {
         int answer = 0;
-        int lenA = arrayA.length;
-        int lenB = arrayB.length;
         
-        Arrays.sort(arrayA);
-        Arrays.sort(arrayB);
-        
-        int num = 2;
-        List<Integer> listA = new ArrayList<>();
-        while(num <= arrayA[lenA-1]) {
-            for(int i=0; i<lenA; i++) {
-                if(arrayA[i]%num != 0) break;
-                if(i == lenA-1) listA.add(num);
-            }
-            
-            num++;
+        int gcdA = arrayA[0];
+        for(int i=1; i<arrayA.length; i++) {
+            gcdA = GCD(gcdA, arrayA[i]);
         }
         
-        num = 2;
-        List<Integer> listB = new ArrayList<>();
-        while(num <= arrayB[lenB-1]) {
-            for(int i=0; i<lenB; i++) {
-                if(arrayB[i]%num != 0) break;
-                if(i == lenB-1) listB.add(num);
-            }
-            
-            num++;
+        int gcdB = arrayB[0];
+        for(int i=1; i<arrayB.length; i++) {
+            gcdB = GCD(gcdB, arrayB[i]);
         }
         
-        Collections.sort(listA, Collections.reverseOrder());
-        Collections.sort(listB, Collections.reverseOrder());
-        
-        if(listB.size() != 0) {
-            for(int i=0; i<lenA; i++) {
-                if(arrayA[i]%listB.get(0) == 0) break;
-                if(i == lenA-1) answer = listB.get(0);
+        boolean A = true;
+        for(int num : arrayB) {
+            if(num%gcdA == 0) {
+                A = false;
+                break;
             }
         }
         
-        if(listA.size() != 0) {
-            for(int i=0; i<lenB; i++) {
-                if(arrayB[i]%listA.get(0) == 0) break;
-                if(i == lenB-1) answer = Math.max(answer, listA.get(0));
+        boolean B = true;
+        for(int num : arrayA) {
+            if(num%gcdB == 0) {
+                B = false;
+                break;
             }
         }
+        
+        if(A) answer = Math.max(answer, gcdA);
+        if(B) answer = Math.max(answer, gcdB);
         
         return answer;
+    }
+    
+    private int GCD(int a, int b) {
+        return b==0 ? a : GCD(b, a%b);
     }
 }
