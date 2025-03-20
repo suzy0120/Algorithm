@@ -1,15 +1,19 @@
 class Solution {
+    public static int[] fibo;
+    
     public int solution(int n) {
-        if(n == 0) return 0;
-        if(n == 1) return 1;
+        fibo = new int[n+1];
+        DFS(n);
         
-        int a = 1, b = 1;
-        for(int i=3; i<=n; i++) {
-            int next = (a+b) % 1234567;
-            a = b;
-            b = next;
-        }
+        int answer = DFS(n);
+        return answer;
+    }
+    
+    public int DFS(int num) {
+        if(fibo[num] > 0) return fibo[num];
         
-        return b;
+        if(num == 1) return fibo[num]=1;
+        else if(num == 2) return fibo[num]=1;
+        else return fibo[num] = (DFS(num-2) + DFS(num-1)) % 1234567;
     }
 }
