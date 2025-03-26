@@ -4,61 +4,30 @@ class Solution {
     public int solution(String s) {
         int answer = 0;
         
-        Queue<Character> q = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
-        Map<String, Integer> map = new HashMap<>();
-        
-        int seq = 0;
-        while(seq < s.length()) {
-            for(char c : s.toCharArray()) {
-                q.add(c);
-            }
+        for(int i=0; i<s.length(); i++) {
+            Stack<Character> stack = new Stack<>();
+            boolean isValid = true;
             
-            s = s.substring(1) + s.charAt(0);
-            seq++;
-            
-            while(!q.isEmpty()) {
-                if(q.peek()=='(') {
-                    stack.add(q.poll());
-                    map.put("()", map.getOrDefault("()", 0)+1);
-                } else if(q.peek()=='[') {
-                    stack.add(q.poll());
-                    map.put("[]", map.getOrDefault("[]", 0)+1);
-                } else if(q.peek()=='{') {
-                    stack.add(q.poll());
-                    map.put("{}", map.getOrDefault("{}", 0)+1);
-                } else if(q.peek()==')') {
-                    if(stack.isEmpty() || stack.peek() != '(') break;
+            for(int j=0; j<s.length(); j++) {
+                char ch = s.charAt((i+j) % s.length());
+                
+                if(ch=='(' || ch=='[' || ch=='{') stack.push(ch);
+                else {
+                    if(stack.isEmpty()) {
+                        isValid = false;
+                        break;
+                    }
                     
-                    q.poll();
-                    stack.pop();
-                    
-                    map.put("()", map.getOrDefault("()", 0)-1);
-                    if(map.get("()") < 0) break;
-                } else if(q.peek()==']') {
-                    if(stack.isEmpty() || stack.peek() != '[') break;
-                    
-                    q.poll();
-                    stack.pop();
-                    
-                    map.put("[]", map.getOrDefault("[]", 0)-1);
-                    if(map.get("[]") < 0) break;
-                } else {
-                    if(stack.isEmpty() || stack.peek() != '{') break;
-                    
-                    q.poll();
-                    stack.pop();
-                    
-                    map.put("{}", map.getOrDefault("{}", 0)-1);
-                    if(map.get("{}") < 0) break;
+                    if((ch == ')' && stack.pop() != '(') ||
+                       (ch == ']' && stack.pop() != '[') ||
+                       (ch == '}' && stack.pop() != '{')) {
+                        isValid = false;
+                        break;
+                    }
                 }
             }
             
-            if(q.isEmpty() && stack.isEmpty()) answer++;
-            
-            q.clear();
-            stack.clear();
-            map.clear();
+            if(isValid && stack.isEmpty()) answer++;
         }
         
         return answer;
