@@ -3,7 +3,7 @@ import java.util.*;
 class Solution {
     public static int[] dr = {0, 1, 0, -1};
     public static int[] dc = {1, 0, -1, 0};
-    public static int N, M, count;
+    public static int N, M;
     public static char[][] map;
     public static boolean[][] visit;
     
@@ -23,16 +23,14 @@ class Solution {
             for(int c=0; c<M; c++) {
                 if(map[r][c] == 'X' || visit[r][c]) continue;
                 
-                count = 0;
-                DFS(r, c);
-                list.add(count);
+                list.add(DFS(r, c));
             }
         }
         
-        int[] answer = new int[list.size()];
         if(list.isEmpty()) return new int[]{-1};
         
         Collections.sort(list);
+        int[] answer = new int[list.size()];
         for(int i=0; i<answer.length; i++) {
             answer[i] = list.get(i); 
         }
@@ -40,9 +38,9 @@ class Solution {
         return answer;
     }
     
-    private void DFS(int r, int c) {
+    private int DFS(int r, int c) {
         visit[r][c] = true;
-        count += map[r][c] - '0';
+        int sum = map[r][c] - '0';
         
         for(int d=0; d<4; d++) {
             int nr = r + dr[d];
@@ -51,7 +49,9 @@ class Solution {
             if(nr<0 || N<=nr || nc<0 || M<=nc) continue;
             if(map[nr][nc]=='X' || visit[nr][nc]) continue;
             
-            DFS(nr, nc);
+            sum += DFS(nr, nc);
         }
+        
+        return sum;
     }
 }
