@@ -6,20 +6,15 @@ class Solution {
     
     public int[] solution(int rows, int columns, int[][] queries) {
         int[][] matrix = new int[rows][columns];
-        int count = 1;
         for(int i=0; i<rows; i++) {
             for(int j=0; j<columns; j++) {
-                matrix[i][j] = count++;
+                matrix[i][j] = i * columns + (j+1);
             }
         }
         
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
         int[] answer = new int[queries.length];
-        int idx = 0;
         
         for(int i=0; i<queries.length; i++) {
-            pq.clear();
-            
             int x1 = queries[i][0]-1;
             int y1 = queries[i][1]-1;
             int x2 = queries[i][2]-1;
@@ -28,6 +23,7 @@ class Solution {
             int cr = x1;
             int cc = y1;
             int before = matrix[cr][cc];
+            int min = before;
             
             for(int d=0; d<4; d++) {
                 while(true) {
@@ -35,9 +31,9 @@ class Solution {
                     cc += dc[d];
                     
                     int tmp = matrix[cr][cc];
-                    pq.add(tmp);
                     matrix[cr][cc] = before;
                     before = tmp;
+                    min = Math.min(min, before);
                     
                     if(d==0 && cc==y2) break;
                     if(d==1 && cr==x2) break;
@@ -46,7 +42,7 @@ class Solution {
                 }
             }
             
-            answer[idx++] = pq.poll();
+            answer[i] = min;
         }
         
         return answer;
