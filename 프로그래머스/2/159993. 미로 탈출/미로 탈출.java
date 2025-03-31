@@ -5,6 +5,7 @@ class Solution {
     public static int[] dc = {1, 0, -1, 0};
     public static int N, M;
     public static char[][] map;
+    public static boolean[][] visit;
     
     public int solution(String[] maps) {
         N = maps.length;
@@ -22,18 +23,18 @@ class Solution {
             }
         }
         
-        int[] result = BFS(startR, startC, 0, 'L');
-        if(result == null) return -1;
+        int[] result1 = BFS(startR, startC, 'L');
+        if(result1 == null) return -1;
         
-        result = BFS(result[0], result[1], result[2], 'E');
-        return (result == null) ? -1 : result[2];
+        int[] result2 = BFS(result1[0], result1[1], 'E');
+        return (result2 == null) ? -1 : result1[2]+result2[2];
     }
-    
-    private int[] BFS(int r, int c, int dist, char target) {
+
+    private int[] BFS(int r, int c, char target) {
         Queue<int[]> q = new LinkedList<>();
-        q.add(new int[] {r, c, dist});
+        q.add(new int[] {r, c, 0});
         
-        boolean[][] visit = new boolean[N][M];
+        visit = new boolean[N][M];
         visit[r][c] = true;
         
         while(!q.isEmpty()) {
@@ -42,7 +43,7 @@ class Solution {
             int cc = cur[1];
             int cd = cur[2];
             
-            if(map[cr][cc] == target) return new int[] {cr, cc, cd};
+            if(map[cr][cc] == target) return cur;
             
             for(int d=0; d<4; d++) {
                 int nr = cr + dr[d];
