@@ -2,6 +2,7 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] priorities, int location) {
+        
         Queue<int[]> queue = new LinkedList<>();
         
         for(int i=0; i<priorities.length; i++) {
@@ -24,10 +25,10 @@ class Solution {
             if(b) {
                 answer++;
                 
-                if(cur[0] == location) return answer;
+                if(cur[0] == location) break;
             }
         }
         
-        return -1;
+        return answer;
     }
 }
