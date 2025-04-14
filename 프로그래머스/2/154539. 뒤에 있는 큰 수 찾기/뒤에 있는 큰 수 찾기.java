@@ -6,15 +6,15 @@ class Solution {
         Stack<Integer> stack = new Stack<>();
         
         for(int i=0; i<numbers.length; i++) {
-            while(!stack.isEmpty() && numbers[stack.peek()] < numbers[i]) {
-                int index = stack.pop();
-                answer[index] = numbers[i];
+            while(!stack.isEmpty() && numbers[i] > numbers[stack.peek()]) {
+                int idx = stack.pop();
+                answer[idx] = numbers[i];
             }
             
             stack.push(i);
         }
         
-        while (!stack.isEmpty()) {
+        while(!stack.isEmpty()) {
             answer[stack.pop()] = -1;
         }
         
