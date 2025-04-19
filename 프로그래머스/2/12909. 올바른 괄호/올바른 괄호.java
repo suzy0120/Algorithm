@@ -6,20 +6,19 @@ class Solution {
         Stack<Character> stack = new Stack<>();
         
         for(char c : s.toCharArray()) {
-            if(c == '(') {
-                stack.push(c);
-            } else {
+            if(c == '(') stack.add(c);
+            else {
                 if(stack.isEmpty()) {
                     answer = false;
                     break;
-                } else {
-                    stack.pop();
                 }
+                
+                stack.pop();
             }
         }
         
         if(!stack.isEmpty()) answer = false;
-
+        
         return answer;
     }
 }
