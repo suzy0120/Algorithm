@@ -7,9 +7,8 @@ class Solution {
         Arrays.sort(A);
         Arrays.sort(B);
         
-        int idx = B.length-1;
         for(int i=0; i<A.length; i++) {
-            answer += A[i] * B[idx--];
+            answer += A[i] * B[B.length-1-i];
         }
         
         return answer;
