@@ -7,7 +7,8 @@ class Solution {
             int sum = 0;
             
             for(int i=start; i<=n; i++) {
-                sum+=i;
+                sum += i;
+                
                 if(sum == n) answer++;
                 if(sum >= n) break;
             }
