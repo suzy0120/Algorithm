@@ -25,11 +25,11 @@ class Solution {
             int c = cur[1];
             int cnt = cur[2];
             
+            if(r==n-1 && c==m-1) return cnt;
+            
             for(int d=0; d<4; d++) {
                 int nr = r + dr[d];
                 int nc = c + dc[d];
-                
-                if(nr==n-1 && nc==m-1) return cnt+1;
                 
                 if(nr<0 || nr>=n || nc<0 || nc>=m) continue;
                 if(maps[nr][nc]==0 || visit[nr][nc]) continue;
