@@ -1,6 +1,5 @@
-import java.util.*;
-
 class Solution {
+    
     public static int answer = 0;
     
     public int solution(int[] numbers, int target) {
@@ -9,13 +8,16 @@ class Solution {
         return answer;
     }
     
-    public void DFS(int[] numbers, int target, int idx, int sum) {
-        if(idx == numbers.length) {
-            if(sum == target) answer++;
+    public void DFS(int[] numbers, int target, int i, int sum) {
+        if(i == numbers.length) {
+            if(sum == target) {
+                answer++;
+            }
+            
             return;
         }
         
-        DFS(numbers, target, idx+1, sum+numbers[idx]);
-        DFS(numbers, target, idx+1, sum-numbers[idx]);
+        DFS(numbers, target, i+1, sum+numbers[i]);
+        DFS(numbers, target, i+1, sum-numbers[i]);
     }
 }
