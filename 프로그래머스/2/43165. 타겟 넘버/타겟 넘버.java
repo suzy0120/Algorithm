@@ -10,9 +10,7 @@ class Solution {
     
     public void DFS(int[] numbers, int target, int i, int sum) {
         if(i == numbers.length) {
-            if(sum == target) {
-                answer++;
-            }
+            if(sum == target) answer++;
             
             return;
         }
