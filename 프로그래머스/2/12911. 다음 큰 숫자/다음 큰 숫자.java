@@ -1,24 +1,29 @@
 class Solution {
     public int solution(int n) {
-        String str = Integer.toBinaryString(n);
-        int cnt1 = 0;
+        int answer = 0;
+        int next = n+1;
         
-        for(char c : str.toCharArray()) {
+        String str1 = Integer.toBinaryString(n);
+        int cnt1 = 0;
+        for(char c : str1.toCharArray()) {
             if(c == '1') cnt1++;
         }
         
-        while(true) {
-            n++;
-            String next = Integer.toBinaryString(n);
+        while(next > n) {
+            String str2 = Integer.toBinaryString(next);
             int cnt2 = 0;
-            
-            for(char c : next.toCharArray()) {
+            for(char c : str2.toCharArray()) {
                 if(c == '1') cnt2++;
             }
             
-            if(cnt1 == cnt2) break;
+            if(cnt1 == cnt2) {
+                answer = Integer.parseInt(str2, 2);
+                break;
+            }
+            
+            next++;
         }
         
-        return n;
+        return answer;
     }
 }
