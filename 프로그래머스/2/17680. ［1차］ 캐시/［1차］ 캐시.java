@@ -2,24 +2,22 @@ import java.util.*;
 
 class Solution {
     public int solution(int cacheSize, String[] cities) {
+        if(cacheSize == 0) return cities.length * 5;
+        
         int answer = 0;
+        Queue<String> LRU = new LinkedList<>();
         
         for(int i=0; i<cities.length; i++) {
-            cities[i] = cities[i].toLowerCase();
-        }
-        
-        Queue<String> queue = new LinkedList<>();
-        for(String city : cities) {
-            if(queue.contains(city)) {
-                answer++;
-                
-                queue.remove(city);
-                queue.add(city);
+            String city = cities[i].toLowerCase();
+            
+            if(LRU.contains(city)) {
+                LRU.remove(city);
+                LRU.add(city);
+                answer += 1;
             } else {
-                answer+=5;
-                
-                if(queue.size() == cacheSize) queue.poll();
-                if(cacheSize > 0) queue.add(city);
+                if(LRU.size() >= cacheSize) LRU.poll();
+                LRU.add(city);
+                answer += 5;
             }
         }
         
