@@ -2,8 +2,6 @@ import java.util.*;
 
 class Solution {
     public int solution(String s) {
-        int answer = 0;
-        
         Stack<Character> stack = new Stack<>();
         
         for(char c : s.toCharArray()) {
@@ -11,8 +9,8 @@ class Solution {
             else stack.push(c);
         }
         
+        int answer = 0;
         if(stack.isEmpty()) answer = 1;
-        
         return answer;
     }
 }
