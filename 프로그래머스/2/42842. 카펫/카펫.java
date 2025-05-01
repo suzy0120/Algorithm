@@ -1,7 +1,6 @@
 class Solution {
     public int[] solution(int brown, int yellow) {
         int[] answer = new int[2];
-        
         int sum = brown + yellow;
         
         for(int height=3; height<=sum/height; height++) {
