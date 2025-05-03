@@ -2,21 +2,23 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
-        Queue<Integer> q = new LinkedList<>(); // 선입선출
+        Queue<Integer> q = new LinkedList<>();
         
         for(int i=0; i<progresses.length; i++) {
             int remain = 100 - progresses[i];
-            int day = (int) Math.ceil((double) remain/speeds[i]);
+            int day = remain / speeds[i];
+            if(remain % speeds[i] > 0) day++;
+            
             q.add(day);
         }
         
         List<Integer> list = new ArrayList<>();
         
         while(!q.isEmpty()) {
-            int cur = q.poll();
+            int baepo = q.poll();
             int count = 1;
             
-            while(!q.isEmpty() && cur >= q.peek()) {
+            while(!q.isEmpty() && baepo >= q.peek()) {
                 q.poll();
                 count++;
             }
@@ -24,6 +26,11 @@ class Solution {
             list.add(count);
         }
         
-        return list.stream().mapToInt(i -> i).toArray();
+        int[] answer = new int[list.size()];
+        for(int i=0; i<list.size(); i++) {
+            answer[i] = list.get(i);
+        }
+        
+        return answer;
     }
 }
