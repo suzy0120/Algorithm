@@ -4,7 +4,7 @@ class Solution {
         int sum = brown + yellow;
         
         for(int height=3; height<=sum/height; height++) {
-            if(sum%height == 0) {
+            if(sum % height == 0) {
                 int width = sum / height;
                 int border = width*2 + height*2 - 4;
                 
