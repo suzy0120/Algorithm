@@ -11,8 +11,7 @@ class Solution {
         List<Integer> list = new ArrayList<>(map.values());
         list.sort(Collections.reverseOrder());
         
-        int count = 0;
-        int answer = 0;
+        int count = 0, answer = 0;
         for(int n : list) {
             count += n;
             answer++;
