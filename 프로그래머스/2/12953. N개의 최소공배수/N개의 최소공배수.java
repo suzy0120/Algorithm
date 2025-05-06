@@ -2,7 +2,7 @@ class Solution {
     public int solution(int[] arr) {
         int lcm = arr[0];
         
-        for (int i = 1; i < arr.length; i++) {
+        for(int i=1; i<arr.length; i++) {
             lcm = getLCM(lcm, arr[i]);
         }
         
@@ -21,6 +21,7 @@ class Solution {
             a = b;
             b = temp;
         }
+        
         return a;
     }
 }
