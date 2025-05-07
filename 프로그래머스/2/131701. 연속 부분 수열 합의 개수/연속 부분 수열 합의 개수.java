@@ -14,11 +14,11 @@ class Solution {
                 
                 set.add(count[i]);
             }
+            
             num++;
         }
         
         int answer = set.size();
-        
         return answer;
     }
 }
