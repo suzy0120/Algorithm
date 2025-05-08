@@ -11,6 +11,7 @@ class Solution {
             }
             
             int count = 0;
+            
             for(int j=i; j<i+10; j++) {
                 if(map.containsKey(discount[j]) && map.get(discount[j])>0) {
                     map.replace(discount[j], map.get(discount[j])-1);
