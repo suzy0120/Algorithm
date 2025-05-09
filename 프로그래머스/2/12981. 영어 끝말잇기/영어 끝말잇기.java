@@ -3,7 +3,6 @@ import java.util.*;
 class Solution {
     public int[] solution(int n, String[] words) {
         int[] answer = {0, 0};
-        
         Set<String> set = new HashSet<>();
         set.add(words[0]);
         
