@@ -1,31 +1,33 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.next();
-        int len = s.length();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        int aCount = 0;
-        for(int i=0; i<len; i++) {
-            if(s.charAt(i) == 'a') aCount++;
+		String str = br.readLine();
+		
+		int aCount = 0;
+		for(char c : str.toCharArray()) {
+			if(c == 'a') aCount++;
         }
-        
-        String doubleS = s + s;
-        
-        int bCount = 0;
-        for(int i=0; i<aCount; i++) {
-            if(doubleS.charAt(i) == 'b') bCount++;
-        }
-        
-        int min = bCount;
-        
-        for(int i=1; i<len; i++) {
-            if(doubleS.charAt(i-1) == 'b') bCount--;
-            if(doubleS.charAt(i+aCount-1) == 'b') bCount++;
-            min = Math.min(min, bCount);
-        }
-        
-        System.out.println(min);
-    }
+		
+		String doubleS = str + str;
+		
+		int bCount = 0;
+		for(int i=0; i<aCount; i++) {
+			if(doubleS.charAt(i) == 'b') bCount++;
+		}
+		
+		int result = bCount;
+		for(int i=1; i<str.length(); i++) {
+			if(doubleS.charAt(i-1) == 'b') bCount--;
+			if(doubleS.charAt(i+aCount-1) == 'b') bCount++;
+			
+			result = Math.min(result, bCount);
+		}
+		
+		System.out.println(result);
+	}
 }
