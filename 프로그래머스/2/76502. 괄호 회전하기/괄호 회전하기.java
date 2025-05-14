@@ -18,9 +18,9 @@ class Solution {
                         break;
                     }
                     
-                    if((ch == ')' && stack.pop() != '(') ||
-                       (ch == ']' && stack.pop() != '[') ||
-                       (ch == '}' && stack.pop() != '{')) {
+                    if((ch==')' && stack.pop() != '(') ||
+                       (ch==']' && stack.pop() != '[') ||
+                       (ch=='}' && stack.pop() != '{')) {
                         isValid = false;
                         break;
                     }
