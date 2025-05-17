@@ -18,7 +18,7 @@ class Solution {
             int baepo = q.poll();
             int count = 1;
             
-            while(!q.isEmpty() && baepo >= q.peek()) {
+            while(!q.isEmpty() && baepo>=q.peek()) {
                 q.poll();
                 count++;
             }
