@@ -6,7 +6,7 @@ class Solution {
         Queue<int[]> queue = new LinkedList<>();
         
         for(int i=0; i<priorities.length; i++) {
-            queue.add(new int[] {i, priorities[i]});
+            queue.add(new int[]{i, priorities[i]});
         }
         
         int answer = 0;
@@ -24,7 +24,6 @@ class Solution {
             
             if(b) {
                 answer++;
-                
                 if(cur[0] == location) break;
             }
         }
