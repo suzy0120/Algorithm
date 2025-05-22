@@ -4,6 +4,7 @@ class Solution {
     public int solution(int N, int[][] road, int K) {
         final int INF = Integer.MAX_VALUE;
         int[] dist = new int[N+1];
+        
         Arrays.fill(dist, INF);
         dist[1] = 0;
         
