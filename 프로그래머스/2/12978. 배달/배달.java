@@ -28,7 +28,6 @@ class Solution {
         while(!pq.isEmpty()) {
             int[] cur = pq.poll();
             int node = cur[0], d = cur[1];
-            
             if(d > dist[node]) continue;
             
             for(int[] next : adj[node]) {
