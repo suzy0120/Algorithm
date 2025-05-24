@@ -32,8 +32,8 @@ class Solution {
             
             for(int[] next : adj[node]) {
                 int nextNode = next[0], time = next[1];
-                if(dist[nextNode] > d + time) {
-                    dist[nextNode] = d + time;
+                if(dist[nextNode] > d+time) {
+                    dist[nextNode] = d+time;
                     pq.offer(new int[]{nextNode, dist[nextNode]});
                 }
             }
