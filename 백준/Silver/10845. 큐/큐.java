@@ -9,15 +9,15 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
-
+		
 		Queue<Integer> queue = new LinkedList<>();
-		int last = -1;
+		int last = 0;
 		
 		for(int i=0; i<N; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			String s = st.nextToken();
 			
-			if(s.contains("push")) {
+			if(s.equals("push")) {
 				int num = Integer.parseInt(st.nextToken());
 				queue.add(num);
 				last = num;
