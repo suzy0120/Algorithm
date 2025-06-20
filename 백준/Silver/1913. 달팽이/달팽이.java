@@ -9,39 +9,41 @@ public class Main {
 		int num = Integer.parseInt(br.readLine());
 		
 		int[][] snail = new int[N][N];
-		int[] dx = {1, 0, -1, 0}; // ↓ → ↑ ←
-		int[] dy = {0, 1, 0, -1};
+		int[] dr = {1, 0, -1, 0}; // ↓ → ↑ ←
+		int[] dc = {0, 1, 0, -1};
 		
-		int x = 0, y = 0, dir = 0;
-		for(int i=N*N; i>=1; i--) {
-			snail[x][y] = i;
+		int r = 0, c = 0, dir = 0;
+		int row = 0, col = 0;
+		for(int value=N*N; value>=1; value--) {
+			snail[r][c] = value;
 			
-			int nx = x + dx[dir];
-			int ny = y + dy[dir];
-			
-			if(nx<0 || ny<0 || nx>=N || ny>=N || snail[nx][ny] != 0) {
-				dir = (dir+1) % 4;
-				nx = x + dx[dir];
-				ny = y + dy[dir];
+			if(snail[r][c] == num) {
+				row = r+1;
+				col = c+1;
 			}
 			
-			x = nx;
-			y = ny;
+			int nr = r + dr[dir];
+			int nc = c + dc[dir];
+			
+			if(nr<0 || nc<0 || nr>=N || nc>=N || snail[nr][nc]!=0) {
+				dir = (dir+1) % 4;
+				nr = r + dr[dir];
+				nc = c + dc[dir];
+			}
+			
+			r = nr;
+			c = nc;
 		}
 		
-		int r=0, c=0;
+		StringBuilder sb = new StringBuilder();
 		for(int i=0; i<N; i++) {
 			for(int j=0; j<N; j++) {
-				if(snail[i][j] == num) {
-					r = i+1;
-					c = j+1;
-				}
-				
-				System.out.print(snail[i][j] + " ");
+				sb.append(snail[i][j]).append(" ");
 			}
-			System.out.println();
+			sb.append("\n");
 		}
+		sb.append(row).append(" ").append(col);
 		
-		System.out.println(r + " " + c);
+		System.out.println(sb.toString());
 	}
 }
