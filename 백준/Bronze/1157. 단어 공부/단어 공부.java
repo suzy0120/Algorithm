@@ -7,28 +7,25 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String str = br.readLine();
 		
-		str = str.toUpperCase();
-		
 		int[] count = new int[26];
 		for(char c : str.toCharArray()) {
-			count[c-65]++;
+			if('a' <= c && c <= 'z') c = (char)(c-'a'+'A');
+			count[c-'A']++;
 		}
 		
 		int max = Integer.MIN_VALUE;
-		int idx = 0;
+		int idx = -1;
+		boolean b = false;
 		for(int i=0; i<count.length; i++) {
 			if(count[i] > max) {
 				max = count[i];
 				idx = i;
+				b = false;
+			} else if(count[i] == max) {
+				b = true;
 			}
 		}
 		
-		int cnt = 0;
-		for(int n : count) {
-			if(n == max) cnt++;
-		}
-		
-		if(cnt > 1) System.out.println("?");
-		else System.out.println((char) (idx+65));
+		System.out.println(b ? "?" : (char)(idx+'A'));
 	}
 }
