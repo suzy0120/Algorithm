@@ -5,32 +5,32 @@ import java.io.InputStreamReader;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
 		int T = Integer.parseInt(br.readLine());
-		for(int tc=0; tc<T; tc++) {
+		
+		for(int i=0; i<T; i++) {
 			String str = br.readLine();
 			
 			int[] count = new int[26];
 			for(char c : str.toCharArray()) {
 				if(c == ' ') continue;
 				
-				count[c-'a']++;
+				count[c - 'a']++;
 			}
 			
-			int max = 0, idx = -1;
-			boolean dup = false;
-			
-			for(int i=0; i<26; i++) {
-				if(count[i] > max) {
-					max = count[i];
-					idx = i;
-					dup = false;
-				} else if(count[i]==max && count[i]!=0) {
-					dup = true;
+			int max = 0;
+			int idx = -1;
+			boolean b = false;
+			for(int j=0; j<count.length; j++) {
+				if(count[j] > max) {
+					max = count[j];
+					idx = j;
+					b = false;
+				} else if(count[j] == max) {
+					b = true;
 				}
 			}
 			
-			System.out.println(dup ? '?' : (char)(idx+'a'));
+			System.out.println(b ? "?" : (char)(idx+'a'));
 		}
 	}
 }
