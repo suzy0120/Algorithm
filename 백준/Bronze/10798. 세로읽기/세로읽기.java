@@ -5,21 +5,22 @@ import java.io.InputStreamReader;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-		String[] words = new String[5];
+		
+		String[] s = new String[5];
 		int max = 0;
 		for(int i=0; i<5; i++) {
-			words[i] = br.readLine();
-			max = Math.max(max, words[i].length());
+			s[i] = br.readLine();
+			if(s[i].length() > max) max = s[i].length();
 		}
 		
-		String result = "";
-		for(int c=0; c<max; c++) {
-			for(int r=0; r<5; r++) {
-				if(c < words[r].length()) result += words[r].charAt(c);
+		String answer = "";
+		for(int i=0; i<max; i++) {
+			for(int j=0; j<5; j++) {
+				if(i >= s[j].length()) continue;
+				answer += s[j].charAt(i);
 			}
 		}
 		
-		System.out.println(result);
+		System.out.println(answer);
 	}
 }
