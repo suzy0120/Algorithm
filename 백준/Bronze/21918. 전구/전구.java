@@ -11,12 +11,10 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 		
-		String s = br.readLine();
-		String[] arr = s.split(" ");
-		
+		st = new StringTokenizer(br.readLine());
 		int[] lamps = new int[N+1];
-		for(int i=1; i<lamps.length; i++) {
-			lamps[i] = Integer.parseInt(arr[i-1]);
+		for(int i=1; i<=N; i++) {
+			lamps[i] = Integer.parseInt(st.nextToken());
 		}
 		
 		for(int tc=0; tc<M; tc++) {
@@ -43,11 +41,11 @@ public class Main {
 			}
 		}
 		
-		for(int i=1; i<lamps.length; i++) {
-			System.out.print(lamps[i]);
-			
-			if(i == N) continue;
-			System.out.print(" ");
+		StringBuilder sb = new StringBuilder();
+		for(int i=1; i<=N; i++) {
+			sb.append(lamps[i]);
+			if(i != N) sb.append(" ");
 		}
+		System.out.println(sb);
 	}
 }
