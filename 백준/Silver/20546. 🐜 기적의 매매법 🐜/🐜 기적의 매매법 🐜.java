@@ -35,6 +35,8 @@ public class Main {
         	} else if(price[i] < price[i-1]) {
         		down++;
         		up = 0;
+        	} else {
+        		up = down = 0;
         	}
         	
         	if(up >= 3) {
