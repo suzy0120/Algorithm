@@ -2,9 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -17,38 +15,38 @@ public class Main {
         	StringTokenizer st = new StringTokenizer(br.readLine());
         	
         	int[] order = new int[N];
-        	Map<Integer, Integer> teams = new HashMap<>();
+        	int[] teamCount = new int[N+1];
         	for(int i=0; i<N; i++) {
         		order[i] = Integer.parseInt(st.nextToken());
-        		teams.put(order[i], teams.getOrDefault(order[i], 0)+1);
+        		teamCount[order[i]]++;
         	}
         	
-        	Map<Integer, List<Integer>> pos = new HashMap<>();
-        	for(Map.Entry<Integer, Integer> entry : teams.entrySet()) {
-        		if(entry.getValue() < 6) continue;
-        		
-        		pos.putIfAbsent(entry.getKey(), new ArrayList<>());
+        	List<Integer>[] pos = new ArrayList[N+1];
+        	for(int i=1; i<=N; i++) {
+        		if(teamCount[i] >= 6) pos[i] = new ArrayList<>();
         	}
         	
         	int rank = 1;
         	for(int i=0; i<N; i++) {
-        		if(pos.containsKey(order[i])) pos.get(order[i]).add(rank++);
+        		int team = order[i];
+        		if(pos[team] != null) {
+        			pos[team].add(rank++);
+        		}
         	}
         	
             int win = 0;
             int bestSum = Integer.MAX_VALUE;
             int bestFifth = Integer.MAX_VALUE;
-        	for(Map.Entry<Integer, List<Integer>> entry : pos.entrySet()) {
-        		int sum = 0;
-        		for(int i=0; i<4; i++) {
-        			sum += entry.getValue().get(i);
-        		}
-        		int fifth = entry.getValue().get(4);
+        	for(int i=1; i<=N; i++) {
+        		if(pos[i] == null)  continue;
+        		
+        		int sum = pos[i].get(0) + pos[i].get(1) + pos[i].get(2) + pos[i].get(3);
+        		int fifth = pos[i].get(4);
         		
         		if(sum < bestSum || (sum == bestSum && fifth < bestFifth)) {
         			bestSum = sum;
         			bestFifth = fifth;
-        			win = entry.getKey();
+        			win = i;
         		}
         	}
         	
