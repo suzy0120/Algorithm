@@ -2,13 +2,10 @@ class Solution {
     public long solution(int a, int b) {
         long answer = 0;
         
-        if(a>b) {
-            int c = a;
-            a=b;
-            b=c;
-        }
+        int start = Math.min(a, b);
+        int end = Math.max(a, b);
         
-        for(int i=a; i<=b; i++) {
+        for(int i=start; i<=end; i++) {
             answer += i;
         }
         
