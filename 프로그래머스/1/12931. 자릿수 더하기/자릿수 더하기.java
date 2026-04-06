@@ -3,12 +3,13 @@ import java.util.*;
 public class Solution {
     public int solution(int n) {
         int answer = 0;
-
-        while(n > 0) {
-            answer += n%10;
-            n /= 10;
+        
+        String s = Integer.toString(n);
+        for(int i=0; i<s.length(); i++) {
+            int num = s.charAt(i) - '0';
+            answer += num;
         }
-
+        
         return answer;
     }
 }
