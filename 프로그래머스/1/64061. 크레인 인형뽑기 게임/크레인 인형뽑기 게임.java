@@ -3,19 +3,23 @@ import java.util.*;
 class Solution {
     public int solution(int[][] board, int[] moves) {
         int answer = 0;
-        Stack<Integer> stack = new Stack<>();
+        ArrayList<Integer> list = new ArrayList<>();
         
-        for(int move : moves) {
-            int col = move-1;
-            for(int i=0; i<board.length; i++) {
-                if(board[i][col] != 0) {
-                    if(!stack.isEmpty() && stack.peek() == board[i][col]) {
-                        stack.pop();
-                        answer+=2;
-                    } else stack.push(board[i][col]);
-                    board[i][col]=0;
+        for(int i=0; i<moves.length; i++) {
+            int x = moves[i]-1;
+            for(int y=0; y<board.length; y++) {
+                int value = board[y][x];
+                if(value == 0) continue;
+                
+                board[y][x] = 0;
+                if(list.size() > 0 && list.get(list.size()-1) == value) {
+                    list.remove(list.size() - 1);
+                    answer+=2;
                     break;
                 }
+
+                list.add(value);
+                break;
             }
         }
         
