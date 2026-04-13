@@ -1,14 +1,15 @@
 class Solution {
     public boolean solution(int x) {
         boolean answer = true;
-        char[] array = String.valueOf(x).toCharArray();
-        int sum = 0;
         
-        for(char c : array) {
-            sum += c-'0';
+        int org = x;
+        int sum = 0;
+        while(x > 0) {
+            sum += x%10;
+            x /= 10;
         }
         
-        if(x%sum != 0) answer = false;
+        if(org % sum != 0) answer = false;
         return answer;
     }
 }
