@@ -13,8 +13,8 @@ class Solution {
             {2, 1}, // 8
             {2, 2}  // 9
         };
-        int[] leftPos = {3, 0};  // '*'
-        int[] rightPos = {3, 2}; // '#'
+        int[] leftPos = {3, 0};
+        int[] rightPos = {3, 2};
         
         for(int num : numbers) {
             if(num == 1 || num == 4 || num == 7) {
@@ -24,14 +24,14 @@ class Solution {
                 answer += "R";
                 rightPos = keypad[num];
             } else {
-                int leftDist = Math.abs(leftPos[0] - keypad[num][0]) 
-                             + Math.abs(leftPos[1] - keypad[num][1]);
-                int rightDist = Math.abs(rightPos[0] - keypad[num][0]) 
-                              + Math.abs(rightPos[1] - keypad[num][1]);
-                if(leftDist < rightDist) {
+                int[] targetPos = keypad[num];
+                int leftDis = Math.abs(leftPos[0] - targetPos[0]) + Math.abs(leftPos[1] - targetPos[1]);
+                int rightDis = Math.abs(rightPos[0] - targetPos[0]) + Math.abs(rightPos[1] - targetPos[1]);
+                
+                if(leftDis < rightDis) {
                     answer += "L";
                     leftPos = keypad[num];
-                } else if(leftDist > rightDist) {
+                } else if(leftDis > rightDis) {
                     answer += "R";
                     rightPos = keypad[num];
                 } else {
