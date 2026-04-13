@@ -13,37 +13,27 @@ class Solution {
             {2, 1}, // 8
             {2, 2}  // 9
         };
-        int[] leftPos = {3, 0};
-        int[] rightPos = {3, 2};
+        int[] leftPos = {3, 0}; // *
+        int[] rightPos = {3, 2}; // #
         
         for(int num : numbers) {
-            if(num == 1 || num == 4 || num == 7) {
-                answer += "L";
-                leftPos = keypad[num];
-            } else if(num == 3 || num == 6 || num == 9) {
-                answer += "R";
-                rightPos = keypad[num];
-            } else {
-                int[] targetPos = keypad[num];
-                int leftDis = Math.abs(leftPos[0] - targetPos[0]) + Math.abs(leftPos[1] - targetPos[1]);
-                int rightDis = Math.abs(rightPos[0] - targetPos[0]) + Math.abs(rightPos[1] - targetPos[1]);
+            String pushHand = "";
+            
+            if(num == 1 || num == 4 || num == 7) pushHand = "L";
+            else if(num == 3 || num == 6 || num == 9) pushHand = "R";
+            else {
+                int[] target = keypad[num];
+                int leftDis = Math.abs(leftPos[0] - target[0]) + Math.abs(leftPos[1] - target[1]);
+                int rightDis = Math.abs(rightPos[0] - target[0]) + Math.abs(rightPos[1] - target[1]);
                 
-                if(leftDis < rightDis) {
-                    answer += "L";
-                    leftPos = keypad[num];
-                } else if(leftDis > rightDis) {
-                    answer += "R";
-                    rightPos = keypad[num];
-                } else {
-                    if(hand.equals("right")) {
-                        answer += "R";
-                        rightPos = keypad[num];
-                    } else {
-                        answer += "L";
-                        leftPos = keypad[num];
-                    }
-                }
+                if(leftDis < rightDis) pushHand = "L";
+                else if(leftDis > rightDis) pushHand = "R";
+                else pushHand = hand.equals("right") ? "R" : "L";
             }
+            
+            answer += pushHand;
+            if(pushHand.equals("L")) leftPos = keypad[num];
+            else rightPos = keypad[num];
         }
         
         return answer;
