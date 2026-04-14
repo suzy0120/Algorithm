@@ -1,76 +1,56 @@
 class Solution {
     public String[] solution(int n, int[] arr1, int[] arr2) {
         String[] answer = new String[n];
-        for(int i=0; i<n; i++) {
-            answer[i] = "";
-        }
+        String[] map1 = new String[n];
+        String[] map2 = new String[n];
         
-        // arr1 -> 2진수 변환
-        int[][] board1 = new int[n][n];
-        for(int r=0; r<n; r++) {
-            int num = arr1[r];
-            int[] remainder = new int[n];
-            int idx = 0;
-            if(num == 0) {
-                for(int c=0; c<n; c++) {
-                    board1[r][c] = 0;
-                }
-            } else {
-                while(num > 0) {
-                    remainder[idx]= num%2;
-                    num/=2;
-                    idx++;
-                }
-                int zero = n-idx;
-                for(int c=0; c<zero; c++) {
-                    board1[r][c] = 0;
-                }
-                for(int c=zero; c<n; c++) {
-                    board1[r][c] = remainder[--idx];
+        for(int i=0; i<arr1.length; i++) {
+            String s1 = "";
+            int num1 = arr1[i];
+            
+            while(num1 > 1) {
+                s1 += num1 % 2;
+                num1 /= 2;
+            }
+            s1 += num1;
+            
+            int len1 = s1.length();
+            if(s1.length() < n) {
+                for(int j=0; j<n-len1; j++) {
+                    s1 += '0';
                 }
             }
+            
+            StringBuffer sb1 = new StringBuffer(s1);
+            map1[i] = sb1.reverse().toString();
         }
         
-        // arr2 -> 2진수 변환
-        int[][] board2 = new int[n][n];
-        for(int r=0; r<n; r++) {
-            int num = arr2[r];
-            int[] remainder = new int[n];
-            int idx = 0;
-            if(num == 0) {
-                for(int c=0; c<n; c++) {
-                    board2[r][c] = 0;
-                }
-            } else {
-                while(num > 0) {
-                    remainder[idx]= num%2;
-                    num/=2;
-                    idx++;
-                }
-                int zero = n-idx;
-                for(int c=0; c<zero; c++) {
-                    board2[r][c] = 0;
-                }
-                for(int c=zero; c<n; c++) {
-                    board2[r][c] = remainder[--idx];
+        for(int i=0; i<arr2.length; i++) {
+            String s2 = "";
+            int num2 = arr2[i];
+            
+            while(num2 > 1) {
+                s2 += num2 % 2;
+                num2 /= 2;
+            }
+            s2 += num2;
+            
+            int len2 = s2.length();
+            if(s2.length() < n) {
+                for(int j=0; j<n-len2; j++) {
+                    s2 += '0';
                 }
             }
+            
+            StringBuffer sb2 = new StringBuffer(s2);
+            map2[i] = sb2.reverse().toString();
         }
         
-        // 벽이랑 공백 비교
-        int[][] map = new int[n][n];
         for(int r=0; r<n; r++) {
+            answer[r] = "";
             for(int c=0; c<n; c++) {
-                if(board1[r][c] == board2[r][c] && board1[r][c] == 0) map[r][c]=0;
-                else map[r][c]=1;
-            }
-        }
-        
-        // 벽이면 # 공백이면 '빈칸'
-        for(int r=0; r<n; r++) {
-            for(int c=0; c<n; c++) {
-                if(map[r][c]==0) answer[r] += " ";
-                else answer[r] += "#";
+                if(map1[r].charAt(c) == '1' || map2[r].charAt(c) == '1') answer[r] += "#";
+                else answer[r] += " ";
             }
         }
         
