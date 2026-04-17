@@ -1,13 +1,11 @@
 class Solution {
     boolean solution(String s) {
-        boolean answer = true;
-        int count = 0;
-        
-        for(int i=0; i<s.length(); i++) {
-            if(s.charAt(i)=='p' || s.charAt(i)=='P') count++;
-            else if(s.charAt(i)=='y' || s.charAt(i)=='Y') count--;
+        int a = 0, b = 0;
+        for(char c : s.toCharArray()) {
+            if(c == 'p' || c == 'P') a++;
+            else if(c == 'y' || c == 'Y') b++;
         }
         
-        return (count!=0) ? answer = false : answer;
+        return a == b ? true : false;
     }
 }
